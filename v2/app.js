@@ -6,7 +6,7 @@ var mongoose = require("mongoose");
 const PORT = process.env.PORT || 7000;
 
 //tell express to use body parser
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(express.urlencoded({ extended: true}));
 app.set("view engine", "ejs");
 
 //create db and connect mongodb to app
@@ -91,4 +91,8 @@ res.render("new");
 app.listen(PORT, function(){
     console.log("Yelpcamp By Psalmyjay, SERVER STARTED");
 });
+
+function newFunction() {
+    app.use(express.urlencoded({ extended: true }));
+}
  
