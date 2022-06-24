@@ -13,10 +13,10 @@ app.set("view engine", "ejs");
 mongoose.connect('mongodb://localhost:27017/yelp_camp', {useNewUrlParser: true, useUnifiedTopology: true});
 
 //Schema set up..
-
 var campgroundSchema = new mongoose.Schema({
     name: String,
-    image: String
+    image: String,
+    description: String
 });
 
 //compile campground into a model
@@ -67,8 +67,9 @@ app.get("/campgrounds", function(req, res){
 app.post("/campgrounds", function(req, res){
     var name = req.body.name;
     var image = req.body.image; 
+    var description = req.body.description; 
     // get data from form to add to 
-    var newCampground = {name: name, image: image}
+    var newCampground = {name: name, image: image, description: description}
     // Create a new campground and save to the DB
     campground.create(newCampground, function(err, newlyCreated){
         if(err){
@@ -86,6 +87,10 @@ app.post("/campgrounds", function(req, res){
 app.get("/campgrounds/new", function(req, res){
 res.render("new");
 
+});
+
+app.get("/campgrounds/:id", function(req, res){
+    res.send("Welcome");
 });
 
 app.listen(PORT, function(){
